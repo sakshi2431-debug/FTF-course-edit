@@ -1,0 +1,119 @@
+/*
+ * Design tokens from the Assistiv - Instructors Figma file.
+ * Names mirror the Figma variables and styles. styles.css must not contain raw
+ * colour values: every colour comes from this file.
+ */
+:root {
+  /* Brand */
+  --brand-50: #eff8ff;
+  --brand-100: #d1e9ff;
+  --brand-200: #b2ddff;
+  --brand-500: #2e90fa;
+  --brand-600: #1570ef;
+  --brand-700: #175cd3;
+
+  /* Blue */
+  --blue-50: #eff8ff;
+  --blue-700: #175cd3;
+
+  /* Gray */
+  --white: #ffffff;
+  --gray-200: #e9eaeb;
+  --gray-300: #d5d7da;
+  --gray-400: #a4a7ae;
+  --gray-500: #717680;
+  --gray-600: #535862;
+  --gray-700: #414651;
+  --gray-900: #181d27;
+
+  /* Red primitives from the Fuel the Future Design System */
+  --red-100: #fee9e7;
+  --red-200: #fdd3d0;
+  --red-300: #fcb3ad;
+  --red-500: #ec221f;
+  --red-600: #c00f0c;
+  --red-700: #900b09;
+  --red-800: #690807;
+
+  /* Accents */
+  --warning-400: #fdb022;
+  --purple-500: #7a5af8;
+  --purple-600: #6938ef;
+
+  /* Simple Design System variables */
+  --sds-color-background-default-default: #ffffff;
+  --sds-color-text-default-default: #1e1e1e;
+  --sds-color-text-default-secondary: #757575;
+  --sds-color-text-default-tertiary: #b3b3b3;
+  --sds-color-text-positive-default: #02542d;
+  --sds-color-text-neutral-default: #303030;
+  --sds-color-border-default-default: #d9d9d9;
+  --sds-color-border-neutral-secondary: #767676;
+  --sds-color-brand-100: #f5f5f5;
+  --sds-color-brand-200: #e6e6e6;
+  --sds-color-slate-100: #f3f3f3;
+  --sds-color-gray-800: #2c2c2c;
+  --sds-color-yellow-100: #fffbeb;
+  --sds-color-yellow-600: #bf6a02;
+  --sds-color-green-100: #ebffee;
+  --sds-color-green-400: #85e0a3;
+  --sds-size-space-100: 4px;
+  --sds-size-space-200: 8px;
+  --sds-size-space-300: 12px;
+  --sds-size-space-400: 16px;
+  --sds-size-space-600: 24px;
+  --sds-size-space-800: 32px;
+  --sds-size-radius-200: 8px;
+  --sds-size-radius-400: 16px;
+  --corner-small: 8px;
+
+  /* Effects */
+  --shadow-xs: 0 1px 2px 0 rgba(10, 13, 18, 0.05);
+  --shadow-dropdown: drop-shadow(0 1px 1px rgba(10, 13, 18, 0.05));
+  --shadow-overlay: 0 12px 28px rgba(10, 13, 18, 0.18);
+  --shadow-section: drop-shadow(0 1px 1px rgba(15, 23, 41, 0.04));
+
+  /* Text styles */
+  --font-inter: Inter, sans-serif;
+  --text-lg-semibold: 600 18px/28px var(--font-inter);
+  --text-md-regular: 400 16px/24px var(--font-inter);
+  --text-md-medium: 500 16px/24px var(--font-inter);
+  --text-md-semibold: 600 16px/24px var(--font-inter);
+  --text-sm-regular: 400 14px/20px var(--font-inter);
+  --text-sm-medium: 500 14px/20px var(--font-inter);
+  --text-sm-semibold: 600 14px/20px var(--font-inter);
+  --text-xs-regular: 400 12px/18px var(--font-inter);
+  --text-xs-medium: 500 12px/18px var(--font-inter);
+  --text-xs-semibold: 600 12px/18px var(--font-inter);
+  --text-xs-bold: 700 12px/18px var(--font-inter);
+
+  /*
+   * Values hard-coded in the frames, with no matching Figma variable.
+   * Kept exact so the screens match, and grouped so they can be replaced if
+   * these are moved into the design system.
+   */
+  --frame-step-inactive: #e8e9ed;
+  --frame-plan-border: #e5e7eb;
+  --frame-plan-divider: #f3f4f6;
+  --frame-plan-title: #1e2939;
+  --frame-plan-subtitle: #99a1af;
+  --frame-unit-label: #364153;
+  --frame-lesson-label: #4a5565;
+  --frame-heading: #111827;
+  --frame-heading-secondary: #374151;
+  --frame-black: #000000;
+  --frame-code-background: #1e1e2e;
+  --frame-code-function: #89b4fa;
+  --frame-code-punctuation: #cdd6f4;
+  --frame-code-string: #a6e3a1;
+  --frame-validate-heading: #0f1729;
+  --frame-validate-subtitle: #475569;
+  --frame-validate-muted: #64748b;
+  --frame-validate-label: #334155;
+  --frame-validate-card-border: #e7ebf1;
+  --frame-validate-list-border: #eef1f5;
+  --frame-validate-button-border: #e2e8f0;
+  --frame-status-ready: #0f9d58;
+  --frame-status-issue: #e0862c;
+  --frame-backdrop: rgba(10, 13, 18, 0.45);
+}
