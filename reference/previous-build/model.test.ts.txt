@@ -1,0 +1,35 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import {
+  initialLessons,
+  revisedContent,
+  commit,
+  undo,
+  redo,
+} from "../src/model.ts";
+test("example changes only the example", () => {
+  const l = initialLessons[0],
+    next = revisedContent(l, "example");
+  assert.equal(next.intro, l.content.intro);
+  assert.equal(next.features, l.content.features);
+  assert.notEqual(next.example, l.content.example);
+});
+test("editing one lesson leaves another unchanged", () => {
+  const ls = structuredClone(initialLessons);
+  const other = structuredClone(ls[1]);
+  ls[0] = commit(ls[0], revisedContent(ls[0], "intro"));
+  assert.deepEqual(ls[1], other);
+});
+test("undo and redo restore exact content", () => {
+  const original = structuredClone(initialLessons[0]);
+  const edited = commit(original, revisedContent(original, "features"));
+  assert.deepEqual(undo(edited).content, original.content);
+  assert.deepEqual(redo(undo(edited)).content, edited.content);
+});
+test("whole lesson preview does not mutate the saved draft", () => {
+  const original = structuredClone(initialLessons[0]);
+  const before = structuredClone(original);
+  const preview = revisedContent(original, "whole");
+  assert.deepEqual(original, before);
+  assert.notDeepEqual(preview, original.content);
+});

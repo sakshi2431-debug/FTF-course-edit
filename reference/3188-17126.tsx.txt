@@ -1,0 +1,1120 @@
+const assetPathPrefix = "https://www.figma.com/api/mcp/asset/bcd3311a-2b36-4316-9a05-025116df765b";
+const imgCheckedTrueIndeterminateFalseSizeSmTypeRadioStateDefault = `${assetPathPrefix}/36a66.svg`;
+const imgHelpCircle = `${assetPathPrefix}/bd184.svg`;
+const imgUsers = `${assetPathPrefix}/f8694.svg`;
+const imgChevronDown = `${assetPathPrefix}/03a14.svg`;
+const imgGrid = `${assetPathPrefix}/3a6f4.svg`;
+const imgSidebar = `${assetPathPrefix}/9f969.svg`;
+const imgMoon = `${assetPathPrefix}/7260d.svg`;
+const imgFrame1984077945 = `${assetPathPrefix}/39add.svg`;
+const imgBookOpen = `${assetPathPrefix}/63540.svg`;
+const imgFileText = `${assetPathPrefix}/53e6b.svg`;
+const imgChevronDown1 = `${assetPathPrefix}/8e67f.svg`;
+const imgBarChart2 = `${assetPathPrefix}/adddb.svg`;
+const imgTool = `${assetPathPrefix}/82c42.svg`;
+const imgDivider = `${assetPathPrefix}/67484.svg`;
+const imgLifeBuoy = `${assetPathPrefix}/66ba6.svg`;
+const imgSettings = `${assetPathPrefix}/1dc62.svg`;
+const imgDivider1 = `${assetPathPrefix}/230cc.svg`;
+const imgLogOut = `${assetPathPrefix}/53c92.svg`;
+const imgDivider2 = `${assetPathPrefix}/945cb.svg`;
+const imgChevronDown2 = `${assetPathPrefix}/6c5d3.svg`;
+const imgDot = `${assetPathPrefix}/6daab.svg`;
+const imgEye = `${assetPathPrefix}/1ac78.svg`;
+const imgBookOpen1 = `${assetPathPrefix}/84583.svg`;
+const imgGlobe = `${assetPathPrefix}/a33bb.svg`;
+const imgUserPlus = `${assetPathPrefix}/9284b.svg`;
+const imgCalendar = `${assetPathPrefix}/8db58.svg`;
+const imgBell = `${assetPathPrefix}/6a7d1.svg`;
+const imgFileText1 = `${assetPathPrefix}/7a1c4.svg`;
+const imgCheck = `${assetPathPrefix}/0f19d.svg`;
+const imgInfo = `${assetPathPrefix}/03691.svg`;
+const imgCheck1 = `${assetPathPrefix}/8c67e.svg`;
+const imgArrowLeft = `${assetPathPrefix}/a23ce.svg`;
+const imgArrowRight = `${assetPathPrefix}/12324.svg`;
+
+type CheckboxBaseProps = {
+  className?: string;
+  checked?: boolean;
+  indeterminate?: "False";
+  size?: "sm";
+  state?: "Default";
+  type?: "Radio";
+};
+
+function CheckboxBase({ className, checked = false, indeterminate = "False", size = "sm", state = "Default", type = "Radio" }: CheckboxBaseProps) {
+  const isCheckedAndFalseAndSmAndRadioAndDefault = checked && indeterminate === "False" && size === "sm" && type === "Radio" && state === "Default";
+  return (
+    <div className={className || `relative size-[16px] ${isCheckedAndFalseAndSmAndRadioAndDefault ? "" : "bg-white border border-[#d5d7da] border-solid overflow-clip rounded-[8px]"}`} id={isCheckedAndFalseAndSmAndRadioAndDefault ? "node-437_1766" : "node-437_1751"}>
+      {isCheckedAndFalseAndSmAndRadioAndDefault && <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCheckedTrueIndeterminateFalseSizeSmTypeRadioStateDefault} />}
+    </div>
+  );
+}
+
+type CheckboxProps = {
+  className?: string;
+  checked?: boolean;
+  indeterminate?: "False";
+  size?: "sm";
+  state?: "Default";
+  supportingText?: "False";
+  text?: "False";
+  type?: "Radio";
+};
+
+function Checkbox({ className, checked = false, indeterminate = "False", size = "sm", state = "Default", supportingText = "False", text = "False", type = "Radio" }: CheckboxProps) {
+  const isNotCheckedAndFalseAndSmAndRadioAndFalseAndFalseAndDefault = !checked && indeterminate === "False" && size === "sm" && type === "Radio" && text === "False" && supportingText === "False" && state === "Default";
+  return (
+    <div className={className || "content-stretch flex items-center justify-center relative"} id={isNotCheckedAndFalseAndSmAndRadioAndFalseAndFalseAndDefault ? "node-437_2201" : "node-437_2167"}>
+      <CheckboxBase checked={checked && indeterminate === "False" && size === "sm" && type === "Radio" && text === "False" && supportingText === "False" && state === "Default" ? true : undefined} className={`relative shrink-0 size-[16px] ${isNotCheckedAndFalseAndSmAndRadioAndFalseAndFalseAndDefault ? "bg-white border border-[#d5d7da] border-solid rounded-[8px]" : ""}`} />
+    </div>
+  );
+}
+
+function HelpCircle({ className }: { className?: string }) {
+  return (
+    <div className={className || "relative size-[24px]"} data-node-id="437:4132" data-name="help-circle">
+      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHelpCircle} />
+    </div>
+  );
+}
+
+type NavItemDropdownBaseProps = {
+  className?: string;
+  property1?: "Default";
+};
+
+function NavItemDropdownBase({ className, property1 = "Default" }: NavItemDropdownBaseProps) {
+  return (
+    <div className={className || "content-stretch flex flex-col items-start relative w-[229px]"} data-node-id="2882:3868">
+      <div className="bg-white content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--corner\/small,8px)] shrink-0 w-full" data-node-id="2882:3869" data-name="_Nav item dropdown base">
+        <div className="bg-white content-stretch flex items-center justify-between overflow-clip px-[12px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="2882:3870" data-name="_Nav item base">
+          <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="2882:3871" data-name="Content">
+            <div className="relative shrink-0 size-[24px]" data-node-id="2882:3872" data-name="users">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUsers} />
+            </div>
+            <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="2882:3873">
+              Users and Roles
+            </p>
+          </div>
+          <div className="flex items-center justify-center relative shrink-0" data-node-id="2882:3874">
+            <div className="flex-none rotate-180">
+              <div className="content-stretch flex items-center relative" data-name="Actions">
+                <div className="flex items-center justify-center relative shrink-0" data-node-id="2882:3875">
+                  <div className="flex-none rotate-180">
+                    <div className="relative size-[20px]" data-name="chevron-down">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type NavItemBaseProps = {
+  className?: string;
+  icon?: "true";
+  selected?: "false";
+};
+
+function NavItemBase({ className, icon = "true", selected = "false" }: NavItemBaseProps) {
+  return (
+    <div className={className || "bg-white content-stretch flex items-center justify-center overflow-clip px-[16px] py-[8px] relative rounded-[var(--corner\\/small,8px)] w-[229px]"} data-node-id="2882:3854">
+      <div className="content-stretch flex flex-[1_0_0] items-center min-w-px pr-[12px] relative" data-node-id="2882:3855" data-name="Content">
+        <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="2882:3856" data-name="Content">
+          <div className="relative shrink-0 size-[24px]" data-node-id="2882:3857" data-name="grid">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGrid} />
+          </div>
+          <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="2882:3858">
+            Institute Overview
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ManualStep4ReviewPublishAlt() {
+  return (
+    <div
+      className="bg-[var(--sds-color-background-default-default,white)] content-stretch flex items-start relative size-full"
+      data-node-id="3188:17126"
+      data-manual-course-creation-flow-annotations="**Manual - Step 4 Review & Publish (Alt)**
+
+  
+
+Alternate version of the Review & Publish screen using the AI flow's 5-step progress indicator (Clarify → Outline → Plan → Validate → Publish) instead of the manual flow's 4-step stepper.
+
+  
+
+**Purpose:** Design exploration for unifying the step indicator across both AI and Manual flows."
+      data-name="Manual — Step 4 Review & Publish (Alt)"
+    >
+      <div className="bg-white content-stretch flex h-[832px] items-start relative shrink-0" data-node-id="3188:17127" data-name="Sidebar navigation - Admin">
+        <div className="content-stretch flex flex-col h-full items-start justify-between relative shrink-0 w-[261px]" data-node-id="I3188:17127;361:2990" data-name="Content">
+          <div className="content-stretch flex flex-col gap-[24px] items-start pt-[24px] relative shrink-0 w-[261px]" data-node-id="I3188:17127;361:2991" data-name="Nav">
+            <div className="content-stretch flex items-center justify-between px-[28px] relative shrink-0 w-full" data-node-id="I3188:17127;361:2992">
+              <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17127;361:2993" data-name="sidebar">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSidebar} />
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17127;361:2994" data-name="moon">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMoon} />
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col items-center pb-[8px] px-[20px] relative shrink-0 w-full" data-node-id="I3188:17127;361:2995" data-name="Header">
+              <div className="content-stretch flex items-start relative shrink-0" data-node-id="I3188:17127;361:2996" data-name="Logo">
+                <div className="content-stretch flex items-start relative shrink-0" data-node-id="I3188:17127;361:2997" data-name="Logo">
+                  <div className="content-stretch flex gap-[7.861px] items-center relative shrink-0" data-node-id="I3188:17127;361:2998" data-name="Gradient">
+                    <div className="relative shrink-0 size-[39.304px]" data-node-id="I3188:17127;361:2999">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame1984077945} />
+                    </div>
+                    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="I3188:17127;361:3004">
+                      <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] col-1 font-['Avenir_Next:Demi_Bold'] leading-[normal] ml-0 mt-0 not-italic relative row-1 text-[32.917px] text-[color:var(--sds-color-gray-800,#2c2c2c)] whitespace-nowrap" data-node-id="I3188:17127;361:3005">
+                        Assistiv
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-[4px] items-start px-[16px] relative shrink-0 w-full" data-node-id="I3188:17127;361:3007" data-name="Navigation">
+              <NavItemBase className="bg-white content-stretch flex items-center justify-center overflow-clip px-[16px] py-[8px] relative rounded-[var(--corner\/small,8px)] shrink-0 w-[229px]" />
+              <NavItemDropdownBase className="content-stretch flex flex-col items-start relative shrink-0 w-[229px]" />
+              <div className="bg-white content-stretch flex items-center justify-center overflow-clip px-[16px] py-[8px] relative rounded-[var(--corner\/small,8px)] shrink-0 w-[229px]" data-node-id="I3188:17127;363:3582" data-name="_Nav item base">
+                <div className="content-stretch flex flex-[1_0_0] items-center min-w-px pr-[12px] relative" data-node-id="I3188:17127;363:3582;363:3544" data-name="Content">
+                  <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;363:3582;363:3558" data-name="Content">
+                    <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;363:3582;363:3559" data-name="book-open">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBookOpen} />
+                    </div>
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="I3188:17127;363:3582;363:3560">{`Courses & Groups`}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0 w-[229px]" data-node-id="I3188:17127;2438:10600" data-name="_Nav item dropdown base">
+                <div className="bg-white content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--corner\/small,8px)] shrink-0 w-full" data-node-id="I3188:17127;2438:10600;361:3231" data-name="_Nav item dropdown base">
+                  <div className="bg-white content-stretch flex items-center justify-between overflow-clip px-[12px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="I3188:17127;2438:10600;361:3232" data-name="_Nav item base">
+                    <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;2438:10600;361:3233" data-name="Content">
+                      <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;2438:10600;361:3234" data-name="file-text">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFileText} />
+                      </div>
+                      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="I3188:17127;2438:10600;361:3235">{`Reports & Insights`}</p>
+                    </div>
+                    <div className="flex items-center justify-center relative shrink-0" data-node-id="I3188:17127;2438:10600;361:3236">
+                      <div className="flex-none rotate-180">
+                        <div className="content-stretch flex items-center relative" data-name="Actions">
+                          <div className="flex items-center justify-center relative shrink-0" data-node-id="I3188:17127;2438:10600;361:3237">
+                            <div className="flex-none rotate-180">
+                              <div className="relative size-[20px]" data-name="chevron-down">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown1} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white content-stretch flex items-center justify-center overflow-clip px-[16px] py-[8px] relative rounded-[var(--corner\/small,8px)] shrink-0 w-[229px]" data-node-id="I3188:17127;363:3596" data-name="_Nav item base">
+                <div className="content-stretch flex flex-[1_0_0] items-center min-w-px pr-[12px] relative" data-node-id="I3188:17127;363:3596;363:3544" data-name="Content">
+                  <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;363:3596;363:3558" data-name="Content">
+                    <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;363:3596;363:3559" data-name="bar-chart-2">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBarChart2} />
+                    </div>
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="I3188:17127;363:3596;363:3560">
+                      AI Usage
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col items-start relative shrink-0 w-[229px]" data-node-id="I3188:17127;363:3314" data-name="_Nav item dropdown base">
+                <div className="bg-white content-stretch flex flex-col items-start overflow-clip relative rounded-[var(--corner\/small,8px)] shrink-0 w-full" data-node-id="I3188:17127;363:3314;361:3231" data-name="_Nav item dropdown base">
+                  <div className="bg-white content-stretch flex items-center justify-between overflow-clip px-[12px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="I3188:17127;363:3314;361:3232" data-name="_Nav item base">
+                    <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;363:3314;361:3233" data-name="Content">
+                      <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;363:3314;361:3234" data-name="tool">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgTool} />
+                      </div>
+                      <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="I3188:17127;363:3314;361:3235">
+                        System setup
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center relative shrink-0" data-node-id="I3188:17127;363:3314;361:3236">
+                      <div className="flex-none rotate-180">
+                        <div className="content-stretch flex items-center relative" data-name="Actions">
+                          <div className="flex items-center justify-center relative shrink-0" data-node-id="I3188:17127;363:3314;361:3237">
+                            <div className="flex-none rotate-180">
+                              <div className="relative size-[20px]" data-name="chevron-down">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown1} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="h-px relative shrink-0 w-full" data-node-id="I3188:17127;361:3072" data-name="Divider">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgDivider} />
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[24px] items-start px-[16px] py-[32px] relative shrink-0 w-full" data-node-id="I3188:17127;361:3073" data-name="Footer">
+            <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full" data-node-id="I3188:17127;361:3074" data-name="Navigation">
+              <div className="bg-white content-stretch flex items-center overflow-clip px-[12px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="I3188:17127;361:3075" data-name="_Nav item base">
+                <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;361:3076" data-name="Content">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;361:3077" data-name="life-buoy">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLifeBuoy} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[24px] not-italic relative shrink-0 text-[#717680] text-[16px] whitespace-nowrap" data-node-id="I3188:17127;361:3078">
+                    Support
+                  </p>
+                </div>
+              </div>
+              <div className="bg-white content-stretch flex items-center overflow-clip px-[12px] py-[8px] relative rounded-[6px] shrink-0 w-full" data-node-id="I3188:17127;361:3079" data-name="_Nav item base">
+                <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;361:3080" data-name="Content">
+                  <div className="relative shrink-0 size-[24px]" data-node-id="I3188:17127;361:3081" data-name="settings">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSettings} />
+                  </div>
+                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[24px] not-italic relative shrink-0 text-[#717680] text-[16px] whitespace-nowrap" data-node-id="I3188:17127;361:3082">
+                    Settings
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="h-px relative shrink-0 w-full" data-node-id="I3188:17127;361:3083" data-name="Divider">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgDivider1} />
+            </div>
+            <div className="content-stretch flex gap-[8px] items-center px-[8px] relative shrink-0 w-full" data-node-id="I3188:17127;361:3084" data-name="Account">
+              <div className="content-stretch flex gap-[12px] items-center relative shrink-0" data-node-id="I3188:17127;361:3085" data-name="Avatar label group">
+                <div className="bg-[#eff8ff] relative rounded-[200px] shrink-0 size-[40px]" data-node-id="I3188:17127;361:3085;1109:488" data-name="Avatar">
+                  <p className="-translate-x-1/2 [word-break:break-word] absolute font-['Inter:Medium'] font-medium leading-[24px] left-1/2 not-italic text-[#1570ef] text-[16px] text-center top-[calc(50%-12px)] w-[40px]" data-node-id="I3188:17127;361:3085;1109:488;19:1257">
+                    OR
+                  </p>
+                </div>
+                <div className="[word-break:break-word] content-stretch flex flex-col items-start leading-[20px] not-italic relative shrink-0 text-[14px] whitespace-nowrap" data-node-id="I3188:17127;361:3085;1109:489" data-name="Text and supporting text">
+                  <p className="font-['Inter:Semi_Bold'] font-semibold relative shrink-0 text-[#181d27]" data-node-id="I3188:17127;361:3085;1109:490">
+                    Olivia Rhye
+                  </p>
+                  <p className="font-['Inter:Regular'] font-normal relative shrink-0 text-[#535862]" data-node-id="I3188:17127;361:3085;1109:491">
+                    olivia@untitledui.com
+                  </p>
+                </div>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17127;361:3086" data-name="Icon">
+                <div className="-translate-x-1/2 -translate-y-1/2 absolute content-stretch flex items-start left-1/2 rounded-[8px] top-1/2" data-node-id="I3188:17127;361:3087" data-name="Button">
+                  <div className="content-stretch flex items-center justify-center overflow-clip p-[8px] relative rounded-[8px] shrink-0" data-node-id="I3188:17127;361:3087;1054:1482" data-name="_Button base">
+                    <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17127;361:3087;1054:1482;1054:7053" data-name="log-out">
+                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgLogOut} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-full relative shrink-0 w-px" data-node-id="I3188:17127;361:3088" data-name="Divider">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgDivider2} />
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col h-full items-start relative shrink-0 w-[1018px]" data-node-id="3188:17128">
+        <div className="content-stretch flex flex-col gap-[16px] h-[1090px] items-start p-[32px] relative shrink-0 w-full" data-node-id="3188:17129">
+          <div className="content-stretch flex flex-col h-[36px] items-start relative shrink-0 w-[954px]" data-node-id="3188:17130">
+            <div className="content-stretch flex items-center justify-between relative shrink-0 w-[952px]" data-node-id="3188:17131">
+              <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0" data-node-id="3188:17132">
+                <div className="col-1 content-stretch flex items-center ml-0 mt-0 relative row-1 w-[362px]" data-node-id="3188:17133">
+                  <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Regular'] font-normal leading-[0] min-w-px not-italic relative text-[#535862] text-[0px]" data-node-id="3188:17134">
+                    <span className="leading-[18px] text-[12px]">Instructor</span>
+                    <span className="leading-[18px] text-[12px]">{` /`}</span>
+                    <span className="leading-[18px] text-[12px]">Create New Course/</span>
+                    <span className="leading-[18px] text-[12px]">{` `}</span>
+                    <span className="leading-[18px] text-[#1570ef] text-[12px]">Create Course Manually</span>
+                  </p>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-[16px] h-[36px] items-center justify-end relative shrink-0 w-[275.969px]" data-node-id="3188:17135" data-name="Container">
+                <div className="h-[36px] relative shrink-0 w-[212px]" data-node-id="3188:17137" data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center relative size-full">
+                    <div className="h-[20px] relative shrink-0 w-[75.898px]" data-node-id="3188:17138" data-name="Text">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
+                        <p className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[20px] left-0 not-italic text-[14px] text-[color:var(--sds-color-text-neutral-default,#303030)] top-[0.5px] whitespace-nowrap" data-node-id="3188:17139">
+                          Active Role:
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 w-[128px]" data-node-id="3188:17140" data-name="Dropdown">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                        <div className="content-stretch flex h-[36px] items-start relative rounded-[8px] shrink-0 w-[128px]" data-node-id="3188:17141" data-name="Button">
+                          <div className="bg-white border border-[#d5d7da] border-solid content-stretch flex gap-[8px] h-[36px] items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0 w-[128px]" data-node-id="3188:17142" data-name="_Button base">
+                            <div className="content-stretch flex items-start mix-blend-multiply relative shrink-0" data-node-id="3188:17143" data-name="Badge">
+                              <div className="bg-[#eff8ff] content-stretch flex items-center justify-center px-[8px] py-[2px] relative rounded-[16px] shrink-0" data-node-id="I3188:17143;1046:5808" data-name="_Badge base">
+                                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[18px] not-italic relative shrink-0 text-[#175cd3] text-[12px] text-center whitespace-nowrap" data-node-id="I3188:17143;1046:5808;1046:26">
+                                  Admin Mode
+                                </p>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 size-[20px]" data-node-id="3188:17144" data-name="chevron-down">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgChevronDown2} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex h-[60px] items-center justify-between overflow-clip relative shrink-0 w-[954px]" data-node-id="3778:4378" data-name="Stepper">
+            <div className="content-stretch flex h-full items-center justify-between relative shrink-0 w-[528px]" data-node-id="3778:4379">
+              <div className="content-stretch flex flex-col gap-[4px] h-full items-center justify-center overflow-clip relative shrink-0" data-node-id="3778:4380" data-name="G">
+                <div className="bg-[#1570ef] content-stretch flex flex-col items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[40px] shrink-0 w-[34px]" data-node-id="3778:4381" data-name="C">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-slate-100,#f3f3f3)] whitespace-nowrap" data-node-id="3778:4382">
+                    1
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3778:4383">
+                  Clarify
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col h-[50px] items-center justify-center overflow-clip relative shrink-0 w-[64px]" data-node-id="3778:4384" data-name="LW">
+                <div className="bg-[var(--sds-color-brand-200,#e6e6e6)] h-[1.5px] relative rounded-[1px] shrink-0 w-[56px]" data-node-id="3778:4385" data-name="Rectangle" />
+              </div>
+              <div className="content-stretch flex flex-col gap-[4px] h-full items-center justify-center overflow-clip relative shrink-0" data-node-id="3778:4386" data-name="G">
+                <div className="bg-[#1570ef] content-stretch flex flex-col items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[100px] shrink-0 w-[28px]" data-node-id="3778:4387" data-name="C">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--sds-color-brand-100,#f5f5f5)] whitespace-nowrap" data-node-id="3778:4388">
+                    2
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3778:4389">
+                  Outline
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col h-[50px] items-center justify-center overflow-clip relative shrink-0 w-[64px]" data-node-id="3778:4390" data-name="LW">
+                <div className="bg-[var(--sds-color-brand-200,#e6e6e6)] h-[1.5px] relative rounded-[1px] shrink-0 w-[56px]" data-node-id="3778:4391" data-name="Rectangle" />
+              </div>
+              <div className="content-stretch flex flex-col gap-[4px] h-full items-center justify-center overflow-clip relative shrink-0" data-node-id="3778:4392" data-name="G">
+                <div className="bg-[#1570ef] content-stretch flex flex-col items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[13px] shrink-0 w-[28px]" data-node-id="3778:4393" data-name="C">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--sds-color-brand-100,#f5f5f5)] whitespace-nowrap" data-node-id="3778:4394">
+                    3
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3778:4395">
+                  Plan
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col h-[50px] items-center justify-center overflow-clip relative shrink-0 w-[64px]" data-node-id="3778:4396" data-name="LW">
+                <div className="bg-[var(--sds-color-brand-200,#e6e6e6)] h-[1.5px] relative rounded-[1px] shrink-0 w-[56px]" data-node-id="3778:4397" data-name="Rectangle" />
+              </div>
+              <div className="content-stretch flex flex-col gap-[4px] h-full items-center justify-center overflow-clip relative shrink-0" data-node-id="3778:4414" data-name="G">
+                <div className="bg-[#1570ef] content-stretch flex flex-col items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[13px] shrink-0 w-[28px]" data-node-id="3778:4415" data-name="C">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--sds-color-brand-100,#f5f5f5)] whitespace-nowrap" data-node-id="3778:4416">
+                    4
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3778:4417">
+                  Validate
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col h-[50px] items-center justify-center overflow-clip relative shrink-0 w-[64px]" data-node-id="3778:4402" data-name="LW">
+                <div className="bg-[var(--sds-color-brand-200,#e6e6e6)] h-[1.5px] relative rounded-[1px] shrink-0 w-[56px]" data-node-id="3778:4403" data-name="Rectangle" />
+              </div>
+              <div className="content-stretch flex flex-col gap-[4px] h-full items-center justify-center overflow-clip relative shrink-0" data-node-id="3778:4419" data-name="G">
+                <div className="bg-[#1570ef] content-stretch flex flex-col items-center justify-center overflow-clip px-[10px] py-[8px] relative rounded-[13px] shrink-0 w-[28px]" data-node-id="3778:4420" data-name="C">
+                  <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[normal] not-italic relative shrink-0 text-[10px] text-[color:var(--sds-color-brand-100,#f5f5f5)] whitespace-nowrap" data-node-id="3778:4421">
+                    5
+                  </p>
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Bold'] font-bold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3778:4422">
+                  Publish
+                </p>
+              </div>
+            </div>
+            <div className="content-stretch flex items-start mix-blend-multiply relative shrink-0" data-node-id="3778:4408" data-name="Badge">
+              <div className="bg-[#eff8ff] content-stretch flex gap-[6px] items-center justify-center pl-[6px] pr-[8px] py-[2px] relative rounded-[16px] shrink-0" data-node-id="I3778:4408;1046:3861" data-name="_Badge base">
+                <div className="relative shrink-0 size-[8px]" data-node-id="I3778:4408;1046:3861;1046:12313" data-name="_Dot">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgDot} />
+                </div>
+                <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[18px] not-italic relative shrink-0 text-[#175cd3] text-[12px] text-center whitespace-nowrap" data-node-id="I3778:4408;1046:3861;1046:30">
+                  Collecting
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col gap-[16px] items-start max-w-[1043.56689453125px] pb-[20px] relative shrink-0 w-full" data-node-id="3188:17168" data-name="Container">
+            <div className="relative shrink-0 w-full" data-node-id="3188:17169" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                <div className="relative shrink-0 w-full" data-node-id="3188:17170" data-name="Heading 1">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                    <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[30px] not-italic relative shrink-0 text-[20px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17171">
+                      Create a course manually
+                    </p>
+                  </div>
+                </div>
+                <div className="h-[27.953px] relative shrink-0 w-[949.227px]" data-node-id="3188:17172" data-name="Paragraph">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[4.659px] relative size-full">
+                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17173">
+                      Start with an empty course structure and add content at your own pace.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="h-[756px] relative shrink-0 w-full" data-node-id="3188:17174" data-name="Step4">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[20px] items-start relative size-full">
+                <div className="flex-[593_0_0] h-[740px] min-w-px relative" data-node-id="3188:17175" data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[4px] items-start relative size-full">
+                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17176" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start overflow-clip p-px relative rounded-[inherit] size-full">
+                        <div className="border-[var(--sds-color-border-default-default,#d9d9d9)] border-b border-solid relative shrink-0 w-full" data-node-id="3188:17177" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between pb-[13px] pt-[12px] px-[16px] relative size-full">
+                            <div className="relative shrink-0 w-[294.258px]" data-node-id="3188:17178" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17179" data-name="Heading 2">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17180">
+                                      Review your course
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[294.258px]" data-node-id="3188:17181" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[16px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17182">
+                                      Make sure everything looks good before publishing.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative rounded-[8px] shrink-0" data-node-id="3188:17183" data-name="Button">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                <div className="bg-white border border-[#d5d7da] border-solid content-stretch flex gap-[8px] items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17183;1041:35793" data-name="_Button base">
+                                  <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17183;1041:35793;1054:6982" data-name="eye">
+                                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEye} />
+                                  </div>
+                                  <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#414651] text-[14px] whitespace-nowrap" data-node-id="I3188:17183;1041:35793;1054:6983">
+                                    Preview course
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 w-full" data-node-id="3188:17184" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                            <div className="border-[var(--sds-color-border-default-default,#d9d9d9)] border-b border-solid relative shrink-0 w-full" data-node-id="3188:17185" data-name="ReviewRow">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center pb-[13px] pt-[12px] px-[16px] relative size-full">
+                                <div className="relative rounded-[10px] shrink-0 size-[32px]" data-node-id="3188:17186" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                                    <div className="relative rounded-[10px] shrink-0 size-[24px]" data-node-id="3188:17187" data-name="Container">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                                        <div className="relative shrink-0 size-[24px]" data-node-id="3188:17188" data-name="book-open">
+                                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBookOpen1} />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-[570px]" data-node-id="3188:17189" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <div className="relative shrink-0 w-full" data-node-id="3188:17190" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17191">
+                                          Course details
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div className="h-[18px] relative shrink-0 w-[458px]" data-node-id="3188:17192" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17193">
+                                          Python Basics · #P102 · 5 units
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17194" data-name="Button">
+                                  <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                    <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17194;1041:35171" data-name="_Button base">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17194;1041:35171;1054:6968">
+                                        Edit
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="border-[var(--sds-color-border-default-default,#d9d9d9)] border-b border-solid relative shrink-0 w-full" data-node-id="3188:17195" data-name="ReviewRow">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center pb-[13px] pt-[12px] px-[16px] relative size-full">
+                                <div className="relative rounded-[10px] shrink-0 size-[32px]" data-node-id="3188:17196" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                                    <div className="relative shrink-0 size-[24px]" data-node-id="3188:17197" data-name="file-text">
+                                      <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFileText} />
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex-[459.234_0_0] min-w-px relative" data-node-id="3188:17198" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <div className="relative shrink-0 w-full" data-node-id="3188:17199" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17200">{`Units & structure`}</p>
+                                      </div>
+                                    </div>
+                                    <div className="h-[18px] relative shrink-0 w-[458px]" data-node-id="3188:17201" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17202">
+                                          5 Units · 1 activity · 1 assessment
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17203" data-name="Button">
+                                  <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                    <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17203;1041:35171" data-name="_Button base">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17203;1041:35171;1054:6968">
+                                        Edit
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17204" data-name="ReviewRow">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative size-full">
+                                <div className="relative rounded-[10px] shrink-0 size-[32px]" data-node-id="3188:17205" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                                    <div className="relative rounded-[10px] shrink-0 size-[24px]" data-node-id="3188:17206" data-name="Container">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-center relative size-full">
+                                        <HelpCircle className="relative shrink-0 size-[24px]" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-[570px]" data-node-id="3188:17208" data-name="Container">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <div className="relative shrink-0 w-full" data-node-id="3188:17209" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17210">
+                                          Content
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div className="h-[18px] relative shrink-0 w-[458px]" data-node-id="3188:17211" data-name="Paragraph">
+                                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                        <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17212">
+                                          1 lesson · 1 activity · 1 assessment
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17213" data-name="Button">
+                                  <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                    <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17213;1041:35171" data-name="_Button base">
+                                      <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17213;1041:35171;1054:6968">
+                                        Edit
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 w-full" data-node-id="3188:17214" data-name="Container:margin">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[16px] relative size-full">
+                        <div className="content-stretch flex flex-col h-[455px] items-start overflow-clip relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17215" data-name="Container">
+                          <div className="relative shrink-0 w-full" data-node-id="3188:17216" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[16px] py-[6px] relative size-full">
+                              <div className="relative shrink-0 w-full" data-node-id="3188:17217" data-name="Heading 2">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                  <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17218">
+                                    Publish settings
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="relative shrink-0 w-full" data-node-id="3188:17219" data-name="Container">
+                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                              <div className="relative shrink-0 w-full" data-node-id="3188:17220" data-name="SettingRow">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[16px] relative size-full">
+                                  <div className="relative shrink-0 w-[682px]" data-node-id="3188:17221" data-name="Container">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center py-[12px] relative size-full">
+                                      <div className="relative shrink-0 size-[24px]" data-node-id="3188:17222" data-name="globe">
+                                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGlobe} />
+                                      </div>
+                                      <div className="flex-[468.82_0_0] min-w-px relative" data-node-id="3188:17223" data-name="Container">
+                                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                          <div className="relative shrink-0 w-full" data-node-id="3188:17224" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17225">
+                                                Visibility
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div className="h-[18px] relative shrink-0 w-[468px]" data-node-id="3188:17226" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17227">
+                                                Organisation
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17228" data-name="Button">
+                                        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                          <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17228;1041:35171" data-name="_Button base">
+                                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17228;1041:35171;1054:6968">
+                                              Done
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="relative shrink-0 w-[682px]" data-node-id="3188:17229" data-name="VisibilityPanel:margin">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[12px] relative size-full">
+                                      <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid content-stretch flex flex-col items-start overflow-clip p-px relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17230" data-name="VisibilityPanel">
+                                        <div className="relative shrink-0 w-full" data-node-id="3188:17231" data-name="Paragraph">
+                                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pb-[8px] pt-[12px] px-[16px] relative size-full">
+                                            <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17232">
+                                              Who can see and access this course?
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <div className="border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid border-t relative shrink-0 w-full" data-node-id="3188:17233" data-name="Button">
+                                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-start pb-[12px] pt-[13px] px-[16px] relative size-full">
+                                            <Checkbox checked className="relative shrink-0" />
+                                            <div className="relative shrink-0 w-[179.195px]" data-node-id="3188:17235" data-name="Container">
+                                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                                <div className="relative shrink-0 w-full" data-node-id="3188:17236" data-name="Paragraph">
+                                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                                    <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="3188:17237">
+                                                      Organisation
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                                <div className="h-[18px] relative shrink-0 w-[179.195px]" data-node-id="3188:17238" data-name="Paragraph">
+                                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17239">
+                                                      Only enrolled users can access
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid border-t relative shrink-0 w-full" data-node-id="3188:17240" data-name="Button">
+                                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-start pb-[12px] pt-[13px] px-[16px] relative size-full">
+                                            <Checkbox className="relative shrink-0" />
+                                            <div className="relative shrink-0 w-[184.039px]" data-node-id="3188:17242" data-name="Container">
+                                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                                <div className="relative shrink-0 w-full" data-node-id="3188:17243" data-name="Paragraph">
+                                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                                    <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17244">
+                                                      Public
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                                <div className="h-[18px] relative shrink-0 w-[184.039px]" data-node-id="3188:17245" data-name="Paragraph">
+                                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17246">
+                                                      Anyone with the link can access
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="relative shrink-0 w-full" data-node-id="3188:17247" data-name="SettingRow">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[16px] relative size-full">
+                                  <div className="relative shrink-0 w-[682px]" data-node-id="3188:17248" data-name="Container">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center py-[12px] relative size-full">
+                                      <div className="relative shrink-0 size-[24px]" data-node-id="3188:17249" data-name="user-plus">
+                                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUserPlus} />
+                                      </div>
+                                      <div className="flex-[477.234_0_0] min-w-px relative" data-node-id="3188:17250" data-name="Container">
+                                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                          <div className="relative shrink-0 w-full" data-node-id="3188:17251" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17252">
+                                                Enrollment
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div className="h-[18px] relative shrink-0 w-[476px]" data-node-id="3188:17253" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17254">
+                                                Self enroll
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17255" data-name="Button">
+                                        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                          <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17255;1041:35171" data-name="_Button base">
+                                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17255;1041:35171;1054:6968">
+                                              Edit
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="relative shrink-0 w-full" data-node-id="3188:17256" data-name="SettingRow">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[16px] relative size-full">
+                                  <div className="relative shrink-0 w-[682px]" data-node-id="3188:17257" data-name="Container">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center py-[12px] relative size-full">
+                                      <div className="relative shrink-0 size-[24px]" data-node-id="3188:17258" data-name="calendar">
+                                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCalendar} />
+                                      </div>
+                                      <div className="flex-[477.234_0_0] min-w-px relative" data-node-id="3188:17259" data-name="Container">
+                                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                          <div className="relative shrink-0 w-full" data-node-id="3188:17260" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17261">
+                                                Start date
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div className="h-[18px] relative shrink-0 w-[476px]" data-node-id="3188:17262" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17263">
+                                                Oct 11, 2025
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17264" data-name="Button">
+                                        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                          <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17264;1041:35171" data-name="_Button base">
+                                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17264;1041:35171;1054:6968">
+                                              Edit
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="relative shrink-0 w-full" data-node-id="3188:17265" data-name="SettingRow">
+                                <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start px-[16px] relative size-full">
+                                  <div className="relative shrink-0 w-[682px]" data-node-id="3188:17266" data-name="Container">
+                                    <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[12px] items-center py-[12px] relative size-full">
+                                      <div className="relative shrink-0 size-[24px]" data-node-id="3188:17267" data-name="bell">
+                                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgBell} />
+                                      </div>
+                                      <div className="flex-[477.234_0_0] min-w-px relative" data-node-id="3188:17268" data-name="Container">
+                                        <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                          <div className="relative shrink-0 w-full" data-node-id="3188:17269" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17270">
+                                                Notifications
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <div className="h-[18px] relative shrink-0 w-[476px]" data-node-id="3188:17271" data-name="Paragraph">
+                                            <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                              <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17272">
+                                                Notify learners on publish
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="border border-[#b2ddff] border-solid relative rounded-[8px] shrink-0" data-node-id="3188:17273" data-name="Button">
+                                        <div className="bg-clip-padding border-[0.5px] border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                                          <div className="bg-[#eff8ff] border border-[#eff8ff] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[8px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17273;1041:35171" data-name="_Button base">
+                                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[20px] not-italic relative shrink-0 text-[#1570ef] text-[14px] whitespace-nowrap" data-node-id="I3188:17273;1041:35171;1054:6968">
+                                              Edit
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-[220px]" data-node-id="3188:17274" data-name="Container">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[12px] items-start relative size-full">
+                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17275" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[17px] relative size-full">
+                        <div className="relative shrink-0 w-full" data-node-id="3188:17276" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center relative size-full">
+                            <div className="relative shrink-0 size-[24px]" data-node-id="3188:17277" data-name="file-text">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFileText1} />
+                            </div>
+                            <div className="relative shrink-0" data-node-id="3188:17278" data-name="Text">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[20px] not-italic relative shrink-0 text-[14px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17279">
+                                  Course summary
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 w-[186px]" data-node-id="3188:17280" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[10px] items-start pt-[12px] relative size-full">
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17281" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17282" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17283">
+                                      Course name
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[186px]" data-node-id="3188:17284" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17285">
+                                      Python Basics
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17286" data-name="Container:margin">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[10px] relative size-full">
+                                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid h-px relative shrink-0 w-full" data-node-id="3188:17287" data-name="Container" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17288" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17289" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17290">
+                                      Course code
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[186px]" data-node-id="3188:17291" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17292">
+                                      #502
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17293" data-name="Container:margin">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[10px] relative size-full">
+                                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid h-px relative shrink-0 w-full" data-node-id="3188:17294" data-name="Container" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17295" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17296" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17297">
+                                      Lessons
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[186px]" data-node-id="3188:17298" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17299">
+                                      4
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17300" data-name="Container:margin">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[10px] relative size-full">
+                                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid h-px relative shrink-0 w-full" data-node-id="3188:17301" data-name="Container" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17302" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17303" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17304">
+                                      Duration
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[186px]" data-node-id="3188:17305" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17306">
+                                      38 min
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17307" data-name="Container:margin">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[10px] relative size-full">
+                                    <div className="border border-[var(--sds-color-border-default-default,#d9d9d9)] border-solid h-px relative shrink-0 w-full" data-node-id="3188:17308" data-name="Container" />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0 w-full" data-node-id="3188:17309" data-name="Container">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <div className="relative shrink-0 w-full" data-node-id="3188:17310" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17311">
+                                      On this unit
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="h-[18px] relative shrink-0 w-[186px]" data-node-id="3188:17312" data-name="Paragraph">
+                                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[2px] relative size-full">
+                                    <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-default,#1e1e1e)] whitespace-nowrap" data-node-id="3188:17313">
+                                      5
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-[var(--sds-color-green-100,#ebffee)] border border-[var(--sds-color-green-400,#85e0a3)] border-solid relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17314" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[13px] relative size-full">
+                        <div className="relative shrink-0 w-full" data-node-id="3188:17315" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center relative size-full">
+                            <div className="relative shrink-0 size-[24px]" data-node-id="3188:17316" data-name="check">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCheck} />
+                            </div>
+                            <div className="relative shrink-0" data-node-id="3188:17317" data-name="Text">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-positive-default,#02542d)] whitespace-nowrap" data-node-id="3188:17318">
+                                  Ready to publish
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="h-[24px] relative shrink-0 w-[186px]" data-node-id="3188:17319" data-name="Paragraph">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[8px] relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Medium'] font-medium leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] whitespace-nowrap" data-node-id="3188:17320">
+                              No missing course content
+                            </p>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 w-[186px]" data-node-id="3188:17321" data-name="Paragraph">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start pt-[4px] relative size-full">
+                            <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] w-[186px]" data-node-id="3188:17322">
+                              You can still make changes after publishing.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-[#eff8ff] border border-[#b2ddff] border-solid relative rounded-[14px] shrink-0 w-full" data-node-id="3188:17323" data-name="Container">
+                      <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start p-[17px] relative size-full">
+                        <div className="relative shrink-0 w-full" data-node-id="3188:17324" data-name="Container">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-center relative size-full">
+                            <div className="relative shrink-0 size-[18px]" data-node-id="3188:17325" data-name="info">
+                              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgInfo} />
+                            </div>
+                            <div className="relative shrink-0" data-node-id="3188:17326" data-name="Text">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col items-start relative size-full">
+                                <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[18px] not-italic relative shrink-0 text-[#1570ef] text-[12px] whitespace-nowrap" data-node-id="3188:17327">
+                                  Tips
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative shrink-0 w-full" data-node-id="3188:17328" data-name="List">
+                          <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[8px] items-start pt-[10px] relative size-full">
+                            <div className="relative shrink-0" data-node-id="3188:17329" data-name="List Item">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-start relative size-full">
+                                <div className="relative shrink-0 size-[16px]" data-node-id="3188:17330" data-name="check">
+                                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCheck1} />
+                                </div>
+                                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] w-[167px]" data-node-id="3188:17331">
+                                  Preview the course to experience it as a learner
+                                </p>
+                              </div>
+                            </div>
+                            <div className="relative shrink-0" data-node-id="3188:17332" data-name="List Item">
+                              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[8px] items-start relative size-full">
+                                <div className="relative shrink-0 size-[16px]" data-node-id="3188:17333" data-name="check">
+                                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCheck1} />
+                                </div>
+                                <p className="[word-break:break-word] font-['Inter:Regular'] font-normal leading-[18px] not-italic relative shrink-0 text-[12px] text-[color:var(--sds-color-text-default-secondary,#757575)] w-[167px]" data-node-id="3188:17334">
+                                  You can still make changes after publishing
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative shrink-0 w-full" data-node-id="3188:17335" data-name="Container">
+              <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-center justify-between pt-[20px] relative size-full">
+                <div className="relative rounded-[8px] shrink-0" data-node-id="3188:17336" data-name="Button">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex items-start relative size-full">
+                    <div className="bg-white border border-[#d5d7da] border-solid content-stretch flex gap-[8px] items-center justify-center overflow-clip px-[18px] py-[10px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17336;1041:35779" data-name="_Button base">
+                      <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17336;1041:35779;1054:6990" data-name="arrow-left">
+                        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowLeft} />
+                      </div>
+                      <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[#414651] text-[16px] whitespace-nowrap" data-node-id="I3188:17336;1041:35779;1054:6991">
+                        Previous
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative shrink-0 w-[342px]" data-node-id="3188:17337">
+                  <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex gap-[20px] items-center justify-end relative size-full">
+                    <div className="content-stretch flex items-start relative rounded-[8px] shrink-0" data-node-id="3188:17338" data-name="Button">
+                      <div className="bg-white border border-[#d5d7da] border-solid content-stretch flex items-center justify-center overflow-clip px-[18px] py-[10px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17338;1041:35785" data-name="_Button base">
+                        <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[#414651] text-[16px] whitespace-nowrap" data-node-id="I3188:17338;1041:35785;1054:6972">
+                          Save Draft
+                        </p>
+                      </div>
+                    </div>
+                    <div className="content-stretch flex items-start relative rounded-[8px] shrink-0" data-node-id="3188:17339" data-name="Button">
+                      <div className="bg-[#1570ef] border border-[#1570ef] border-solid content-stretch flex gap-[8px] items-center justify-center overflow-clip px-[18px] py-[10px] relative rounded-[8px] shadow-[0px_1px_2px_0px_rgba(10,13,18,0.05)] shrink-0" data-node-id="I3188:17339;1041:34315" data-name="_Button base">
+                        <p className="[word-break:break-word] font-['Inter:Semi_Bold'] font-semibold leading-[24px] not-italic relative shrink-0 text-[16px] text-white whitespace-nowrap" data-node-id="I3188:17339;1041:34315;1054:7014">
+                          Publish Course
+                        </p>
+                        <div className="relative shrink-0 size-[20px]" data-node-id="I3188:17339;1041:34315;1054:7015" data-name="arrow-right">
+                          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgArrowRight} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

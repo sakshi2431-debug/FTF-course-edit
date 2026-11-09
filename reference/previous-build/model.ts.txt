@@ -1,0 +1,89 @@
+export type Scope = "intro" | "features" | "example" | "whole";
+export type Content = { intro: string; features: string; example: string };
+export type Lesson = {
+  id: string;
+  title: string;
+  content: Content;
+  notes: string;
+  history: Content[];
+  future: Content[];
+  revision?: Content;
+  busy?: Scope;
+  message?: string;
+};
+export const initialLessons: Lesson[] = [
+  {
+    id: "python",
+    title: "1.1 What is Python?",
+    content: {
+      intro:
+        "Python is a high-level, interpreted programming language known for its simplicity and readability. It is widely used for web development, data analysis, automation, and more.",
+      features:
+        "Easy to learn and readable syntax\nVersatile and used in multiple domains\nCross-platform — runs on Windows, Mac, and Linux\nLarge, supportive developer community",
+      example: 'print("Hello, World!")',
+    },
+    notes: "",
+    history: [],
+    future: [],
+  },
+  {
+    id: "variables",
+    title: "1.2 Variables and data types",
+    content: {
+      intro:
+        "Variables give names to values. Python uses different data types to represent text, whole numbers, decimals, and true or false values.",
+      features:
+        "Use descriptive names for variables\nStore text in strings\nUse integers for whole numbers\nUse booleans for true or false values",
+      example: 'name = "Alex"\nage = 12\nprint(name)',
+    },
+    notes: "",
+    history: [],
+    future: [],
+  },
+];
+export function revisedContent(lesson: Lesson, scope: Scope): Content {
+  const python = lesson.id === "python";
+  const next: Content = {
+    intro: python
+      ? "Python is a programming language that is easy to read and learn. You can use it to build websites, work with data, and automate everyday tasks."
+      : "A variable is a name for a value. For example, age = 12 stores the number 12 with the name age.",
+    features: python
+      ? "Readable commands that are easy to follow\nBuild websites and automate tasks\nWorks on Windows, Mac, and Linux\nFind help from a large community"
+      : "Name a value so you can use it again\nPut quotation marks around text\nWrite whole numbers without quotation marks\nUse True or False for yes-or-no values",
+    example: python
+      ? '# Store a greeting, then display it\nmessage = "Hello, Python!"\nprint(message)'
+      : "# Store a number using a descriptive name\nage = 12\nprint(age)",
+  };
+  return scope === "whole" ? next : { ...lesson.content, [scope]: next[scope] };
+}
+export function commit(lesson: Lesson, content: Content): Lesson {
+  return {
+    ...lesson,
+    content,
+    revision: undefined,
+    busy: undefined,
+    history: [...lesson.history, lesson.content],
+    future: [],
+  };
+}
+export function undo(lesson: Lesson): Lesson {
+  if (!lesson.history.length) return lesson;
+  return {
+    ...lesson,
+    content: lesson.history.at(-1)!,
+    history: lesson.history.slice(0, -1),
+    future: [lesson.content, ...lesson.future],
+    revision: undefined,
+    message: "Change undone.",
+  };
+}
+export function redo(lesson: Lesson): Lesson {
+  if (!lesson.future.length) return lesson;
+  return {
+    ...lesson,
+    content: lesson.future[0],
+    history: [...lesson.history, lesson.content],
+    future: lesson.future.slice(1),
+    message: "Change restored.",
+  };
+}

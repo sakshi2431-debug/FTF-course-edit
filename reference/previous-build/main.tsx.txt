@@ -1,0 +1,1212 @@
+import React, { useEffect, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "./styles.css";
+import {
+  initialLessons,
+  revisedContent,
+  commit,
+  undo,
+  redo,
+  type Lesson,
+  type Scope,
+  type Content,
+} from "./model";
+const icons = {
+  sidebar: "9f969.svg",
+  moon: "7260d.svg",
+  logo: "39add.svg",
+  grid: "3a6f4.svg",
+  users: "f8694.svg",
+  book: "63540.svg",
+  file: "53e6b.svg",
+  chart: "adddb.svg",
+  tool: "82c42.svg",
+  support: "66ba6.svg",
+  settings: "1dc62.svg",
+  logout: "53c92.svg",
+  down: "03a14.svg",
+  back: "a23ce.svg",
+  next: "a20e6.svg",
+  edit: "36120.svg",
+  copy: "92d6b.svg",
+  check: "ccd15.svg",
+  plus: "4d894.svg",
+  quiz: "b58c3.svg",
+  aurora: "bb16e.svg",
+  close: "e5c70.svg",
+  more: "58731.svg",
+  attach: "3e9d5.svg",
+  send: "76e80.svg",
+  code: "a186b.svg",
+  upload: "6f37f.svg",
+};
+function Icon({ name }: { name: keyof typeof icons }) {
+  return (
+    <img
+      className={"icon icon-" + name}
+      src={"/assets/" + icons[name]}
+      alt=""
+    />
+  );
+}
+function Button({
+  children,
+  onClick,
+  primary = false,
+  disabled = false,
+  ...rest
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { primary?: boolean }) {
+  return (
+    <button
+      {...rest}
+      className={
+        "button " + (primary ? "primary" : "") + " " + (rest.className || "")
+      }
+      disabled={disabled}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+const scopes: Record<Scope, string> = {
+  intro: "Opening explanation",
+  features: "Key features",
+  example: "Examples",
+  whole: "Whole lesson",
+};
+function App() {
+  const [lessons, setLessons] = useState<Lesson[]>(() => {
+    try {
+      const saved = JSON.parse(
+        localStorage.getItem("assistiv-lessons-v1") || "null",
+      );
+      return Array.isArray(saved) && saved.length
+        ? saved.map((l: Lesson) => ({
+            ...l,
+            busy: undefined,
+            revision: undefined,
+          }))
+        : structuredClone(initialLessons);
+    } catch {
+      return structuredClone(initialLessons);
+    }
+  });
+  const [selected, setSelected] = useState("python"),
+    [aurora, setAurora] = useState(false),
+    [nav, setNav] = useState(false),
+    [outline, setOutline] = useState(false),
+    [tab, setTab] = useState("Content"),
+    [step, setStep] = useState(3),
+    [scope, setScope] = useState<Scope>("intro"),
+    [editing, setEditing] = useState(false),
+    [manual, setManual] = useState<Content>(initialLessons[0].content),
+    [prompt, setPrompt] = useState(""),
+    [request, setRequest] = useState(
+      "Can you make the explanation simpler for beginners?",
+    ),
+    [save, setSave] = useState("Saved"),
+    [toast, setToast] = useState(""),
+    [answer, setAnswer] = useState(""),
+    [validated, setValidated] = useState(false),
+    [checking, setChecking] = useState(false),
+    [publishing, setPublishing] = useState(false),
+    [published, setPublished] = useState(false),
+    [visibility, setVisibility] = useState("Organisation"),
+    [attachment, setAttachment] = useState(""),
+    [attachmentState, setAttachmentState] = useState(""),
+    [scenario, setScenario] = useState("normal");
+  const timers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  const file = useRef<HTMLInputElement>(null);
+  const auroraToggle = useRef<HTMLButtonElement>(null);
+  const auroraClose = useRef<HTMLButtonElement>(null);
+  const lesson = lessons.find((l) => l.id === selected) || lessons[0],
+    quiz = selected === "quiz";
+  const update = (id: string, fn: (l: Lesson) => Lesson) =>
+    setLessons((ls) => ls.map((l) => (l.id === id ? fn(l) : l)));
+  useEffect(() => {
+    setSave("Saving…");
+    const t = setTimeout(() => {
+      try {
+        localStorage.setItem(
+          "assistiv-lessons-v1",
+          JSON.stringify(
+            lessons.map((l) => ({
+              ...l,
+              busy: undefined,
+              revision: undefined,
+            })),
+          ),
+        );
+        setSave("Saved");
+      } catch {
+        setSave("Could not save locally");
+      }
+    }, 400);
+    return () => clearTimeout(t);
+  }, [lessons]);
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(""), 4500);
+    return () => clearTimeout(t);
+  }, [toast]);
+  useEffect(
+    () => () => Object.values(timers.current).forEach(clearTimeout),
+    [],
+  );
+  useEffect(() => {
+    if (aurora) auroraClose.current?.focus();
+  }, [aurora]);
+  function closeAurora() {
+    setAurora(false);
+    auroraToggle.current?.focus();
+  }
+  function select(id: string) {
+    setSelected(id);
+    setEditing(false);
+    setTab("Content");
+    setOutline(false);
+    setPrompt("");
+    setRequest("Can you make the explanation simpler for beginners?");
+  }
+  function generate(s: Scope) {
+    if (lesson.busy || lesson.revision || editing) return;
+    const id = lesson.id;
+    update(id, (l) => ({ ...l, busy: s, message: undefined }));
+    timers.current[id] = setTimeout(
+      () => {
+        delete timers.current[id];
+        if (scenario === "error") {
+          update(id, (l) => ({
+            ...l,
+            busy: undefined,
+            message:
+              "Could not update this section. Your draft is unchanged. Try again.",
+          }));
+          return;
+        }
+        update(id, (l) => {
+          const content = revisedContent(l, s);
+          return s === "whole"
+            ? {
+                ...l,
+                busy: undefined,
+                revision: content,
+                message: "Revision ready. Review it before applying.",
+              }
+            : { ...commit(l, content), message: scopes[s] + " updated." };
+        });
+        setValidated(false);
+      },
+      scenario === "slow" ? 9000 : 2400,
+    );
+  }
+  function stop() {
+    clearTimeout(timers.current[lesson.id]);
+    delete timers.current[lesson.id];
+    update(lesson.id, (l) => ({
+      ...l,
+      busy: undefined,
+      message: "Stopped. Your draft is unchanged.",
+    }));
+  }
+  function validate() {
+    setStep(4);
+    setChecking(true);
+    setTimeout(() => {
+      setChecking(false);
+      setValidated(
+        Boolean(answer) && !lessons.some((l) => l.busy || l.revision),
+      );
+    }, 1000);
+  }
+  function attach(f?: File) {
+    if (!f) return;
+    setAttachment(f.name);
+    setAttachmentState("Preparing source…");
+    setTimeout(
+      () =>
+        setAttachmentState(
+          scenario === "error"
+            ? "Could not prepare source. Remove it and try again."
+            : "Ready to use · demo source",
+        ),
+      1500,
+    );
+  }
+  const content = lesson.revision || lesson.content;
+  const busy = (s: Scope) => lesson.busy === s;
+  const status = (s: Scope) =>
+    busy(s) ? (
+      <div className="operation" role="status">
+        Updating {scopes[s].toLowerCase()}… <button onClick={stop}>Stop</button>
+      </div>
+    ) : null;
+  const blocked = Boolean(lesson.busy || lesson.revision || editing);
+  return (
+    <div
+      className="app"
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          closeAurora();
+          setNav(false);
+          setOutline(false);
+        }
+      }}
+    >
+      <aside
+        className={"navigation " + (nav ? "mobile-open" : "")}
+        aria-label="Main navigation"
+      >
+        <div>
+          <div className="nav-tools">
+            <button
+              aria-label="Collapse navigation"
+              onClick={() => setNav(false)}
+            >
+              <Icon name="sidebar" />
+            </button>
+            <span title="Light appearance">
+              <Icon name="moon" />
+            </span>
+          </div>
+          <div className="brand">
+            <Icon name="logo" />
+            <span>Assistiv</span>
+          </div>
+          <nav>
+            {(
+              [
+                "Institute Overview",
+                "Users and Roles",
+                "Courses & Groups",
+                "Reports & Insights",
+                "AI Usage",
+                "System setup",
+              ] as const
+            ).map((s, i) => (
+              <button
+                key={s}
+                onClick={() =>
+                  i === 2
+                    ? (setStep(3), setNav(false))
+                    : setToast(s + " is outside this course-editing prototype.")
+                }
+              >
+                <Icon
+                  name={
+                    (
+                      [
+                        "grid",
+                        "users",
+                        "book",
+                        "file",
+                        "chart",
+                        "tool",
+                      ] as const
+                    )[i]
+                  }
+                />
+                <span>{s}</span>
+                {[1, 3, 5].includes(i) && <Icon name="down" />}
+              </button>
+            ))}
+          </nav>
+          <hr />
+        </div>
+        <div className="nav-bottom">
+          <nav>
+            <button
+              onClick={() =>
+                setToast("Prototype support: use the README in this project.")
+              }
+            >
+              <Icon name="support" />
+              Support
+            </button>
+            <button
+              onClick={() =>
+                setToast("Settings are outside this course-editing prototype.")
+              }
+            >
+              <Icon name="settings" />
+              Settings
+            </button>
+          </nav>
+          <hr />
+          <div className="profile">
+            <span className="avatar">OR</span>
+            <div>
+              <strong>Olivia Rhye</strong>
+              <small>olivia@untitled.ui</small>
+            </div>
+            <Icon name="logout" />
+          </div>
+        </div>
+      </aside>
+      {nav && (
+        <button
+          className="scrim"
+          aria-label="Close navigation"
+          onClick={() => setNav(false)}
+        />
+      )}
+      <main className="workspace">
+        <header className="topline">
+          <button
+            className="mobile-nav"
+            aria-label="Open navigation"
+            onClick={() => setNav(true)}
+          >
+            <Icon name="sidebar" />
+          </button>
+          <span>
+            Instructor /{" "}
+            <a href="#plan" onClick={() => setStep(3)}>
+              Create New Course
+            </a>
+          </span>
+          <span className="role">
+            <span>Instructor Mode</span>
+            <Icon name="down" />
+          </span>
+        </header>
+        <div className="progress-row">
+          <ol className="steps">
+            {["Clarify", "Outline", "Plan", "Validate", "Publish"].map(
+              (s, i) => (
+                <li
+                  key={s}
+                  className={i + 1 <= step ? "active" : ""}
+                  aria-current={i + 1 === step ? "step" : undefined}
+                >
+                  <span>{i + 1}</span>
+                  <small>{s}</small>
+                </li>
+              ),
+            )}
+          </ol>
+          <span className="badge">
+            {published
+              ? "Published"
+              : step === 3
+                ? "Editing"
+                : step === 4
+                  ? "Validating"
+                  : "Reviewing"}
+          </span>
+        </div>
+        {step === 3 ? (
+          <>
+            <div className={"editor-layout " + (aurora ? "with-aurora" : "")}>
+              {!aurora && (
+                <aside
+                  className={"course-plan " + (outline ? "outline-open" : "")}
+                >
+                  <div className="plan-title">
+                    <strong>Course plan</strong>
+                    <small>1 unit · {lessons.length} lessons · 1 quiz</small>
+                  </div>
+                  <div className="unit-title">
+                    Introduction to Python <Icon name="down" />
+                  </div>
+                  {lessons.map((l) => (
+                    <button
+                      className={
+                        "lesson-link " + (l.id === selected ? "selected" : "")
+                      }
+                      key={l.id}
+                      onClick={() => select(l.id)}
+                    >
+                      <Icon name="book" />
+                      <span>{l.title}</span>
+                      {l.busy && (
+                        <span className="working-dot" aria-label="Updating" />
+                      )}
+                    </button>
+                  ))}
+                  <button
+                    className={"lesson-link quiz " + (quiz ? "selected" : "")}
+                    onClick={() => select("quiz")}
+                  >
+                    <Icon name="quiz" />
+                    Quiz
+                  </button>
+                  <div className="add-wrap">
+                    <Button
+                      className="soft"
+                      onClick={() => {
+                        const id = "lesson-" + Date.now();
+                        setLessons((ls) => [
+                          ...ls,
+                          {
+                            id,
+                            title: "New lesson",
+                            content: {
+                              intro: "Add your lesson content here.",
+                              features: "Add a key point",
+                              example: "# Add an example",
+                            },
+                            notes: "",
+                            history: [],
+                            future: [],
+                          },
+                        ]);
+                        select(id);
+                      }}
+                    >
+                      <Icon name="plus" />
+                      Add Lessons
+                      <Icon name="down" />
+                    </Button>
+                  </div>
+                </aside>
+              )}
+              <div className="lesson-workspace">
+                {aurora ? (
+                  <div className="lesson-select">
+                    <strong>
+                      <Icon name="back" />
+                      Select Lessons
+                    </strong>
+                    <div>
+                      <span className="select-unit">
+                        <Icon name="file" />
+                        Introduction to Python
+                      </span>
+                      <select
+                        aria-label="Select lesson"
+                        value={selected}
+                        onChange={(e) => select(e.target.value)}
+                      >
+                        {lessons.map((l) => (
+                          <option value={l.id} key={l.id}>
+                            {l.title}
+                          </option>
+                        ))}
+                        <option value="quiz">
+                          Python Basics knowledge check
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="outline-heading">
+                    <h1>Course outline</h1>
+                    <small>{lessons.length} Lessons · 1 Quiz</small>
+                    <Button
+                      className="outline-toggle"
+                      onClick={() => setOutline(!outline)}
+                    >
+                      Lessons
+                    </Button>
+                    <Button onClick={() => file.current?.click()}>
+                      <Icon name="upload" />
+                      Import outline
+                    </Button>
+                  </div>
+                )}
+                <div className="editing-heading">
+                  <h2>
+                    Editing:{" "}
+                    {quiz ? "Python Basics knowledge check" : lesson.title}
+                  </h2>
+                  <div className="edit-actions">
+                    {!quiz && (
+                      <Button
+                        onClick={() => {
+                          setManual({ ...lesson.content });
+                          setEditing(true);
+                        }}
+                        disabled={blocked}
+                      >
+                        <Icon name="edit" />
+                        Edit
+                      </Button>
+                    )}
+                    <button
+                      ref={auroraToggle}
+                      className="button aurora-toggle"
+                      onClick={() => setAurora(!aurora)}
+                      aria-expanded={aurora}
+                    >
+                      <Icon name="aurora" />
+                      {aurora ? "Hide" : "Aurora"}
+                    </button>
+                  </div>
+                </div>
+                {quiz ? (
+                  <section className="quiz-editor">
+                    <h2>Python Basics knowledge check</h2>
+                    <p>Select the correct answer for this question.</p>
+                    <h3>Which line stores the number 12 in a variable?</h3>
+                    {["age = 12", "print(age)", "12 == age"].map((a) => (
+                      <label
+                        className={"choice " + (answer === a ? "checked" : "")}
+                        key={a}
+                      >
+                        <input
+                          type="radio"
+                          name="correct-answer"
+                          value={a}
+                          checked={answer === a}
+                          onChange={() => {
+                            setAnswer(a);
+                            setValidated(false);
+                          }}
+                        />
+                        {a}
+                      </label>
+                    ))}
+                    <small>The selected option becomes the answer key.</small>
+                  </section>
+                ) : (
+                  <>
+                    <div
+                      className="tabs"
+                      role="tablist"
+                      aria-label="Lesson sections"
+                    >
+                      {["Content", "Learning Objectives", "Notes"].map((t) => (
+                        <button
+                          role="tab"
+                          aria-selected={tab === t}
+                          key={t}
+                          onClick={() => setTab(t)}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                    {tab === "Notes" ? (
+                      <label className="notes">
+                        Instructor notes
+                        <textarea
+                          value={lesson.notes}
+                          onChange={(e) =>
+                            update(lesson.id, (l) => ({
+                              ...l,
+                              notes: e.target.value,
+                            }))
+                          }
+                          placeholder="Add notes for this lesson…"
+                        />
+                      </label>
+                    ) : tab === "Learning Objectives" ? (
+                      <section className="objectives">
+                        <h3>By the end of this lesson</h3>
+                        <p>
+                          {lesson.id === "python"
+                            ? "Explain what Python is and run a simple print command."
+                            : "Create a variable and identify common Python data types."}
+                        </p>
+                      </section>
+                    ) : editing ? (
+                      <form
+                        className="manual-editor"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          update(lesson.id, (l) => commit(l, manual));
+                          setEditing(false);
+                          setValidated(false);
+                        }}
+                      >
+                        {(["intro", "features", "example"] as const).map(
+                          (s) => (
+                            <label key={s}>
+                              {scopes[s]}
+                              <textarea
+                                value={manual[s]}
+                                onChange={(e) =>
+                                  setManual({ ...manual, [s]: e.target.value })
+                                }
+                              />
+                            </label>
+                          ),
+                        )}
+                        <div className="actions">
+                          <Button
+                            type="button"
+                            onClick={() => setEditing(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button primary type="submit">
+                            Save changes
+                          </Button>
+                        </div>
+                      </form>
+                    ) : (
+                      <article
+                        className={
+                          "lesson-content " + (busy("whole") ? "updating" : "")
+                        }
+                        aria-busy={Boolean(lesson.busy)}
+                      >
+                        {status("whole")}
+                        <div className="intro-feature">
+                          <img
+                            className="python"
+                            src="/assets/fd9f3.png"
+                            alt="Python logo"
+                          />
+                          <section className={busy("intro") ? "updating" : ""}>
+                            {status("intro")}
+                            <h3>{lesson.title.replace(/^\d+\.\d+ /, "")}</h3>
+                            <p>{content.intro}</p>
+                          </section>
+                          <section
+                            className={
+                              "features " + (busy("features") ? "updating" : "")
+                            }
+                          >
+                            {status("features")}
+                            <h4>Key features</h4>
+                            <ul>
+                              {content.features.split("\n").map((f, i) => (
+                                <li key={i}>
+                                  <span className="tick">
+                                    <Icon name="check" />
+                                  </span>
+                                  {f}
+                                </li>
+                              ))}
+                            </ul>
+                          </section>
+                        </div>
+                        <section
+                          className={
+                            "example " + (busy("example") ? "updating" : "")
+                          }
+                        >
+                          {status("example")}
+                          <h4>Examples</h4>
+                          <div className="code-block">
+                            <div>
+                              <Icon name="code" />
+                              python
+                            </div>
+                            <pre>{content.example}</pre>
+                            <button
+                              aria-label="Copy example"
+                              onClick={() =>
+                                navigator.clipboard
+                                  .writeText(content.example)
+                                  .then(() => setToast("Example copied."))
+                                  .catch(() =>
+                                    setToast(
+                                      "Select the example text to copy it.",
+                                    ),
+                                  )
+                              }
+                            >
+                              <Icon name="copy" />
+                            </button>
+                          </div>
+                        </section>
+                        {lesson.revision && (
+                          <div className="revision" role="status">
+                            <div>
+                              <strong>Revision ready</strong>
+                              <small>Review this lesson before applying.</small>
+                            </div>
+                            <Button
+                              onClick={() =>
+                                update(lesson.id, (l) => ({
+                                  ...l,
+                                  revision: undefined,
+                                  message: "Revision discarded.",
+                                }))
+                              }
+                            >
+                              Discard
+                            </Button>
+                            <Button
+                              primary
+                              onClick={() => {
+                                update(lesson.id, (l) => ({
+                                  ...commit(l, l.revision!),
+                                  message: "Lesson updated.",
+                                }));
+                                setValidated(false);
+                              }}
+                            >
+                              Apply revision
+                            </Button>
+                          </div>
+                        )}
+                      </article>
+                    )}
+                    <div className="draft-footer">
+                      <small role="status">{save}</small>
+                      <button
+                        disabled={!lesson.history.length || blocked}
+                        onClick={() => {
+                          update(lesson.id, undo);
+                          setValidated(false);
+                        }}
+                      >
+                        Undo
+                      </button>
+                      <button
+                        disabled={!lesson.future.length || blocked}
+                        onClick={() => {
+                          update(lesson.id, redo);
+                          setValidated(false);
+                        }}
+                      >
+                        Redo
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+              {aurora && (
+                <aside
+                  className="aurora-panel"
+                  aria-label="Aurora course assistant"
+                >
+                  <header>
+                    <Icon name="aurora" />
+                    <div>
+                      <strong>Aurora</strong>
+                      <small>AI Course Assistant</small>
+                    </div>
+                    <button
+                      aria-label="About Aurora"
+                      onClick={() =>
+                        setToast(
+                          "Aurora changes are simulated locally in this prototype.",
+                        )
+                      }
+                    >
+                      <Icon name="more" />
+                    </button>
+                    <button
+                      ref={auroraClose}
+                      aria-label="Close Aurora"
+                      onClick={closeAurora}
+                    >
+                      <Icon name="close" />
+                    </button>
+                  </header>
+                  <div className="conversation">
+                    {quiz ? (
+                      <p>
+                        Select an answer key in the quiz editor, then run
+                        validation again.
+                      </p>
+                    ) : (
+                      <>
+                        <div className="user-bubble">
+                          {request}
+                          <small>Just now</small>
+                        </div>
+                        <p>Which part should I simplify?</p>
+                        <div className="scope-card">
+                          {(["intro", "features", "example"] as Scope[]).map(
+                            (s) => (
+                              <label
+                                className={
+                                  "choice " + (scope === s ? "checked" : "")
+                                }
+                                key={s}
+                              >
+                                <input
+                                  name="scope"
+                                  type="radio"
+                                  checked={scope === s}
+                                  onChange={() => setScope(s)}
+                                  disabled={blocked}
+                                />
+                                {scopes[s]}
+                              </label>
+                            ),
+                          )}
+                          <Button
+                            primary
+                            disabled={blocked}
+                            onClick={() => generate(scope)}
+                          >
+                            Apply
+                          </Button>
+                        </div>
+                        {lesson.message && (
+                          <div className="ai-message" role="status">
+                            {lesson.message}
+                          </div>
+                        )}
+                        <div className="quick-actions">
+                          <button
+                            disabled={blocked}
+                            onClick={() => generate("intro")}
+                          >
+                            Shorten more
+                          </button>
+                          <button
+                            disabled={blocked}
+                            onClick={() => generate("example")}
+                          >
+                            Add an example
+                          </button>
+                          <button
+                            disabled={blocked}
+                            onClick={() => generate("whole")}
+                          >
+                            Rewrite whole lesson
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="composer-wrap">
+                    {attachment && (
+                      <div className="attachment">
+                        <span>
+                          {attachment}
+                          <small>{attachmentState}</small>
+                        </span>
+                        <button
+                          aria-label="Remove attachment"
+                          onClick={() => {
+                            setAttachment("");
+                            setAttachmentState("");
+                          }}
+                        >
+                          <Icon name="close" />
+                        </button>
+                      </div>
+                    )}
+                    <form
+                      className="composer"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        if (prompt.trim()) {
+                          setRequest(prompt.trim());
+                          setPrompt("");
+                          update(lesson.id, (l) => ({
+                            ...l,
+                            message:
+                              "Choose a section above to apply this demo revision.",
+                          }));
+                        }
+                      }}
+                    >
+                      <textarea
+                        aria-label="Ask Aurora to edit this lesson"
+                        placeholder="Ask Aurora to edit this lesson"
+                        value={prompt}
+                        onChange={(e) => setPrompt(e.target.value)}
+                      />
+                      <div>
+                        <button
+                          type="button"
+                          aria-label="Attach a source"
+                          onClick={() => file.current?.click()}
+                        >
+                          <Icon name="attach" />
+                        </button>
+                        <button
+                          aria-label="Send message"
+                          disabled={!prompt.trim() || blocked}
+                        >
+                          <Icon name="send" />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </aside>
+              )}
+            </div>
+            <footer className="page-footer">
+              <Button
+                onClick={() =>
+                  setToast("This prototype starts at the Plan step.")
+                }
+              >
+                <Icon name="back" />
+                Back
+              </Button>
+              <Button
+                primary
+                disabled={editing || lessons.some((l) => l.busy || l.revision)}
+                onClick={validate}
+              >
+                Validate
+                <Icon name="next" />
+              </Button>
+            </footer>
+          </>
+        ) : step === 4 ? (
+          <>
+            <h1>Check your course</h1>
+            <p className="subtitle">
+              We're making sure your course is complete and can be published
+              correctly.
+            </p>
+            <section className="validation-card">
+              <h2>
+                {checking
+                  ? "Checking your course…"
+                  : validated
+                    ? "Required checks passed"
+                    : "Needs your attention"}
+              </h2>
+              <p className="muted">
+                {checking
+                  ? "Checking the current draft."
+                  : validated
+                    ? "Your current draft is ready to review."
+                    : answer
+                      ? "The draft changed. Run checks again."
+                      : "1 item must be fixed before publishing."}
+              </p>
+              {!answer && (
+                <div className="finding">
+                  <Icon name="quiz" />
+                  <div>
+                    <strong>Python Basics knowledge check</strong>
+                    <small>Select a correct answer.</small>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      select("quiz");
+                      setAurora(false);
+                      setStep(3);
+                    }}
+                  >
+                    Fix
+                  </Button>
+                </div>
+              )}
+              <h2>Course checks</h2>
+              <div className="checks">
+                {[
+                  "Course structure",
+                  "Lessons and activities",
+                  "Files and links",
+                  "Quiz settings",
+                  "Your changes were saved",
+                ].map((s, i) => (
+                  <div key={s}>
+                    <Icon name={i === 0 ? "grid" : i === 1 ? "book" : "file"} />
+                    <span>{s}</span>
+                    <strong
+                      className={i === 3 && !answer ? "warning" : "success"}
+                    >
+                      {checking
+                        ? "Checking…"
+                        : i === 3 && !answer
+                          ? "1 issue"
+                          : validated
+                            ? "Passed"
+                            : "Ready to recheck"}
+                    </strong>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className="summary">
+              <h2>Course summary</h2>
+              <p>Python Basics</p>
+              <p>1 unit · {lessons.length} lessons · 1 quiz</p>
+              <small>
+                Prototype checks verify structure and the answer key, not
+                factual accuracy.
+              </small>
+            </section>
+            <footer className="page-footer">
+              <Button onClick={() => setStep(3)}>
+                <Icon name="back" />
+                Back
+              </Button>
+              <Button
+                primary
+                disabled={checking}
+                onClick={() => (validated ? setStep(5) : validate())}
+              >
+                {validated ? "Continue to publish" : "Run checks again"}
+                <Icon name="next" />
+              </Button>
+            </footer>
+          </>
+        ) : (
+          <>
+            <h1>{published ? "Course published" : "Review and publish"}</h1>
+            <p className="subtitle">
+              {published
+                ? "Demo complete. No course was published to a live organisation."
+                : "Make sure everything looks good before publishing."}
+            </p>
+            <div className="publish-grid">
+              <div>
+                <section className="review-card">
+                  <h2>Review your course</h2>
+                  {["Course details", "Units & structure", "Content"].map(
+                    (s, i) => (
+                      <div className="review-row" key={s}>
+                        <Icon
+                          name={i === 0 ? "book" : i === 1 ? "file" : "quiz"}
+                        />
+                        <div>
+                          <strong>{s}</strong>
+                          <small>
+                            {i === 0
+                              ? "Python Basics"
+                              : `1 unit · ${lessons.length} lessons · 1 quiz`}
+                          </small>
+                        </div>
+                        <Button
+                          className="soft"
+                          onClick={() => {
+                            setStep(3);
+                            select("python");
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                    ),
+                  )}
+                </section>
+                <section className="publish-settings">
+                  <h2>Publish settings</h2>
+                  <h3>Visibility</h3>
+                  {["Organisation", "Public"].map((v) => (
+                    <label className="choice" key={v}>
+                      <input
+                        type="radio"
+                        name="visibility"
+                        checked={visibility === v}
+                        onChange={() => setVisibility(v)}
+                      />
+                      <span>
+                        {v}
+                        <small>
+                          {v === "Organisation"
+                            ? "Only enrolled users can access"
+                            : "Anyone with the link can access"}
+                        </small>
+                      </span>
+                    </label>
+                  ))}
+                  <label className="setting">
+                    Enrollment
+                    <select>
+                      <option>Assigned learners</option>
+                      <option>Self enrol</option>
+                    </select>
+                  </label>
+                  <label className="setting">
+                    Start date
+                    <input type="date" />
+                  </label>
+                  <label className="setting">
+                    Notify learners on publish
+                    <input type="checkbox" defaultChecked />
+                  </label>
+                </section>
+              </div>
+              <aside>
+                <section className="review-card course-summary">
+                  <h2>Course summary</h2>
+                  <small>Course name</small>
+                  <p>Python Basics</p>
+                  <hr />
+                  <small>Lessons</small>
+                  <p>{lessons.length}</p>
+                  <hr />
+                  <small>Assessments</small>
+                  <p>1 quiz</p>
+                </section>
+                <div className="ready">
+                  <strong>
+                    {published ? "Published in prototype" : "Ready to publish"}
+                  </strong>
+                  <p>No missing course content.</p>
+                </div>
+              </aside>
+            </div>
+            <footer className="page-footer">
+              <Button disabled={publishing} onClick={() => setStep(4)}>
+                <Icon name="back" />
+                Previous
+              </Button>
+              <div className="actions">
+                <Button
+                  onClick={() => setToast("Draft saved in this browser.")}
+                >
+                  Save Draft
+                </Button>
+                <Button
+                  primary
+                  disabled={publishing || published || !validated}
+                  onClick={() => {
+                    setPublishing(true);
+                    setTimeout(() => {
+                      setPublishing(false);
+                      if (scenario === "error")
+                        setToast(
+                          "Publishing failed. Your draft is safe. Try again.",
+                        );
+                      else setPublished(true);
+                    }, 1400);
+                  }}
+                >
+                  {publishing
+                    ? "Publishing…"
+                    : published
+                      ? "Published"
+                      : "Publish Course"}
+                  <Icon name="next" />
+                </Button>
+              </div>
+            </footer>
+          </>
+        )}
+        <input
+          ref={file}
+          type="file"
+          hidden
+          onChange={(e) => {
+            attach(e.target.files?.[0]);
+            e.target.value = "";
+          }}
+        />
+        <details className="prototype-tools">
+          <summary>Prototype controls</summary>
+          <label>
+            Response scenario
+            <select
+              value={scenario}
+              onChange={(e) => setScenario(e.target.value)}
+            >
+              <option value="normal">Normal</option>
+              <option value="slow">Slow response</option>
+              <option value="error">Failure</option>
+            </select>
+          </label>
+          <p>
+            AI responses, source preparation and publishing are simulated.
+            Drafts are saved locally.
+          </p>
+        </details>
+      </main>
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+          <button
+            aria-label="Dismiss notification"
+            onClick={() => setToast("")}
+          >
+            <Icon name="close" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+createRoot(document.getElementById("root")!).render(<App />);
