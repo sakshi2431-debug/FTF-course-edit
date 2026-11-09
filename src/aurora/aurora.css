@@ -3616,3 +3616,125 @@ button[aria-disabled="true"].au-link {
     transition: none;
   }
 }
+
+/* Attach menu: floats above the message box, one row per way to add material. */
+.au-composer-card {
+  position: relative;
+}
+.au-attach-pop {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 340px;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--gray-200);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 12px 32px -8px rgba(10, 13, 18, 0.18), 0 4px 8px -4px rgba(10, 13, 18, 0.06);
+  animation: au-attach-in 0.14s ease-out;
+  scrollbar-color: var(--gray-300) transparent;
+  scrollbar-width: thin;
+}
+@keyframes au-attach-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.au-attach-row {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  grid-template-areas: "icon label chev" "icon desc chev";
+  align-items: center;
+  column-gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--gray-900);
+  text-align: left;
+}
+.au-attach-row:hover,
+.au-attach-row:focus-visible {
+  background: var(--gray-100, #f5f5f5);
+  outline: none;
+}
+.au-attach-icon {
+  grid-area: icon;
+  display: flex;
+  color: var(--gray-600, #535862);
+}
+.au-attach-row:hover .au-attach-icon {
+  color: #1570ef;
+}
+.au-attach-label {
+  grid-area: label;
+  min-width: 0;
+  font: var(--text-sm-medium);
+}
+.au-attach-desc {
+  grid-area: desc;
+  color: var(--gray-500, #717680);
+  font: var(--text-xs-regular);
+}
+.au-attach-chevron {
+  grid-area: chev;
+  display: flex;
+  color: var(--gray-400, #a4a7ae);
+}
+.au-attach-row-tight {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "label desc";
+  padding: 7px 10px;
+}
+.au-attach-row-tight .au-attach-label {
+  font: var(--text-sm-regular);
+}
+.au-attach-strong .au-attach-label {
+  color: #1570ef;
+  font: var(--text-sm-medium);
+}
+.au-attach-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 4px 6px;
+  color: var(--gray-900);
+  font: var(--text-sm-semibold, var(--text-sm-medium));
+}
+.au-attach-back {
+  display: flex;
+  padding: 4px;
+  border-radius: 6px;
+  color: var(--gray-600, #535862);
+}
+.au-attach-back:hover {
+  background: var(--gray-100, #f5f5f5);
+}
+.au-attach-sep {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--gray-200);
+}
+.au-attach-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 4px 6px;
+}
+.au-attach-url {
+  display: flex;
+  gap: 6px;
+}
+.au-attach-url .au-input {
+  flex: 1;
+  min-width: 0;
+}
+.au-attach-caption {
+  margin: 4px 10px 2px;
+  color: var(--gray-500, #717680);
+  font: var(--text-xs-medium);
+}
