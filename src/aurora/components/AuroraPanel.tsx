@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   setOwnKnowledge,
   addUrl,
@@ -491,22 +491,76 @@ function ReplaceUrl({ attachmentId }: { attachmentId: string }) {
   );
 }
 
+/* Line icons drawn in currentColor, so the menu can tint them. */
+function MenuGlyph({ name }: { name: "upload" | "link" | "samples" | "back" | "chevron" }) {
+  const paths: Record<typeof name, string> = {
+    upload: "M17.5 12.5v3.33a1.67 1.67 0 0 1-1.67 1.67H4.17a1.67 1.67 0 0 1-1.67-1.67V12.5M14.17 6.67 10 2.5 5.83 6.67M10 2.5v10",
+    link: "M8.33 10.83a4.17 4.17 0 0 0 6.29.45l2.5-2.5a4.17 4.17 0 0 0-5.9-5.9L9.79 4.3M11.67 9.17a4.17 4.17 0 0 0-6.29-.45l-2.5 2.5a4.17 4.17 0 0 0 5.9 5.9l1.42-1.43",
+    samples: "M11.67 1.67H5a1.67 1.67 0 0 0-1.67 1.66v13.34A1.67 1.67 0 0 0 5 18.33h10a1.67 1.67 0 0 0 1.67-1.66V6.67l-5-5Zm0 0v5h5M13.33 10.83H6.67M13.33 14.17H6.67M8.33 7.5H6.67",
+    back: "M15.83 10H4.17M10 4.17 4.17 10 10 15.83",
+    chevron: "m7.5 15 5-5-5-5",
+  };
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+      <path d={paths[name]} stroke="currentColor" strokeWidth="1.67" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* Attach: a small menu above the message box. Each row says what it adds and where from;
+   links and the prototype's sample files open their own step with a way back. */
 function AttachMenu({ onClose }: { onClose: () => void }) {
   const { mock } = useAppState();
   const input = useRef<HTMLInputElement>(null);
+  const root = useRef<HTMLDivElement>(null);
+  const [view, setView] = useState<"menu" | "link" | "samples">("menu");
   const [url, setUrl] = useState("");
   const [error, setError] = useState<string | null>(null);
-  return (
-    <div className="au-attach" role="group" aria-label="Add to Aurora" data-testid="attach-menu">
-      <p className="au-field-label">Add a document</p>
-      <button type="button" className="button small au-full" onClick={() => input.current?.click()}>
-        Choose from your computer
+
+  useEffect(() => {
+    const away = (event: PointerEvent) => {
+      const target = event.target as Element;
+      if (root.current?.contains(target) || target.closest?.("[data-testid='attach']")) return;
+      onClose();
+    };
+    document.addEventListener("pointerdown", away);
+    return () => document.removeEventListener("pointerdown", away);
+  }, [onClose]);
+
+  useEffect(() => {
+    root.current?.querySelector<HTMLElement>("button, input")?.focus();
+  }, [view]);
+
+  const header = (title: string) => (
+    <div className="au-attach-head">
+      <button type="button" className="au-attach-back" aria-label="Back" onClick={() => setView("menu")}>
+        <MenuGlyph name="back" />
       </button>
+      <span>{title}</span>
+    </div>
+  );
+
+  return (
+    <div
+      ref={root}
+      className="au-attach-pop"
+      role="group"
+      aria-label="Add to Aurora"
+      data-testid="attach-menu"
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          event.stopPropagation();
+          if (view === "menu") onClose();
+          else setView("menu");
+        }
+      }}
+    >
       <input
         ref={input}
         className="visually-hidden"
         type="file"
         multiple
+        accept=".pdf,.pptx,.docx,.svg,.png"
         tabIndex={-1}
         aria-label="Upload files"
         data-testid="file-input"
@@ -515,85 +569,119 @@ function AttachMenu({ onClose }: { onClose: () => void }) {
           onClose();
         }}
       />
-      <p className="au-muted">Supports PDF, PPTX, DOCX, SVG, PNG. Max 200 MB per file.</p>
-      <p className="au-field-label">Sample files</p>
-      {mock.sampleFiles.map((file) => (
-        <button
-          key={file.name}
-          type="button"
-          className="au-sample"
-          data-sample={file.name}
-          onClick={() => {
-            uploadFile(file.name, file.size);
-            onClose();
-          }}
-        >
-          <span className="au-truncate">{file.name}</span>
-          <span className="au-muted">{formatSize(file.size)}</span>
-        </button>
-      ))}
-      <button
-        type="button"
-        className="au-link au-left"
-        data-testid="upload-all"
-        onClick={() => {
-          mock.sampleFiles.forEach((file) => uploadFile(file.name, file.size));
-          onClose();
-        }}
-      >
-        Add all sample files
-      </button>
-      <form
-        className="au-url-form"
-        noValidate
-        onSubmit={(event) => {
-          event.preventDefault();
-          const problem = validateUrl(url);
-          setError(problem);
-          if (!problem) {
-            addUrl(url);
-            onClose();
-          }
-        }}
-      >
-        <label className="au-field">
-          <span className="au-field-label">Add a video or link</span>
-          <input
-            className="au-input"
-            placeholder="https://videos.example.com/watch"
-            value={url}
-            aria-invalid={Boolean(error)}
-            data-testid="url-input"
-            onChange={(event) => {
-              setUrl(event.target.value);
-              setError(null);
+      {view === "menu" && (
+        <>
+          <button type="button" className="au-attach-row" onClick={() => input.current?.click()}>
+            <span className="au-attach-icon"><MenuGlyph name="upload" /></span>
+            <span className="au-attach-label">Add files</span>
+            <span className="au-attach-desc">PDF, PPTX, DOCX, SVG, PNG · 200 MB</span>
+          </button>
+          <button type="button" className="au-attach-row" data-testid="attach-link" onClick={() => setView("link")}>
+            <span className="au-attach-icon"><MenuGlyph name="link" /></span>
+            <span className="au-attach-label">Add a video or link</span>
+            <span className="au-attach-desc">YouTube, Vimeo or a web page</span>
+            <span className="au-attach-chevron"><MenuGlyph name="chevron" /></span>
+          </button>
+          <button type="button" className="au-attach-row" data-testid="attach-samples" onClick={() => setView("samples")}>
+            <span className="au-attach-icon"><MenuGlyph name="samples" /></span>
+            <span className="au-attach-label">Sample files</span>
+            <span className="au-attach-desc">Try with example materials</span>
+            <span className="au-attach-chevron"><MenuGlyph name="chevron" /></span>
+          </button>
+        </>
+      )}
+      {view === "samples" && (
+        <>
+          {header("Sample files")}
+          {mock.sampleFiles.map((file) => (
+            <button
+              key={file.name}
+              type="button"
+              className="au-attach-row au-attach-row-tight"
+              data-sample={file.name}
+              onClick={() => {
+                uploadFile(file.name, file.size);
+                onClose();
+              }}
+            >
+              <span className="au-attach-label au-truncate">{file.name}</span>
+              <span className="au-attach-desc">{formatSize(file.size)}</span>
+            </button>
+          ))}
+          <div className="au-attach-sep" />
+          <button
+            type="button"
+            className="au-attach-row au-attach-row-tight au-attach-strong"
+            data-testid="upload-all"
+            onClick={() => {
+              mock.sampleFiles.forEach((file) => uploadFile(file.name, file.size));
+              onClose();
             }}
-          />
-        </label>
-        <button type="submit" className="button small primary">
-          Add
-        </button>
-        {error && (
-          <p className="au-chip-error" role="alert" data-testid="url-error">
-            {error}
-          </p>
-        )}
-      </form>
-      <p className="au-field-label">Sample links</p>
-      {mock.sampleUrls.map((sample) => (
-        <button
-          key={sample}
-          type="button"
-          className="au-sample"
-          data-sample-url={sample}
-          onClick={() => {
-            setUrl(sample);
-            setError(null);
-          }}
-        >
-          <span className="au-truncate">{sample}</span>
-        </button>
-      ))}
+          >
+            <span className="au-attach-label">Add all sample files</span>
+          </button>
+        </>
+      )}
+      {view === "link" && (
+        <>
+          {header("Add a video or link")}
+          <form
+            className="au-attach-form"
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
+              const problem = validateUrl(url);
+              setError(problem);
+              if (!problem) {
+                addUrl(url);
+                onClose();
+              }
+            }}
+          >
+            <div className="au-attach-url">
+              <input
+                className="au-input"
+                aria-label="Video or link URL"
+                placeholder="https://videos.example.com/watch"
+                value={url}
+                aria-invalid={Boolean(error)}
+                data-testid="url-input"
+                onChange={(event) => {
+                  setUrl(event.target.value);
+                  setError(null);
+                }}
+              />
+              <button type="submit" className="button small primary" disabled={!url.trim()}>
+                Add
+              </button>
+            </div>
+            {error && (
+              <p className="au-chip-error" role="alert" data-testid="url-error">
+                {error}
+              </p>
+            )}
+          </form>
+          {mock.sampleUrls.length > 0 && (
+            <>
+              <p className="au-attach-caption">Sample links</p>
+              {mock.sampleUrls.map((sample) => (
+                <button
+                  key={sample}
+                  type="button"
+                  className="au-attach-row au-attach-row-tight"
+                  data-sample-url={sample}
+                  onClick={() => {
+                    setUrl(sample);
+                    setError(null);
+                  }}
+                >
+                  <span className="au-attach-label au-truncate">{sample}</span>
+                </button>
+              ))}
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }
@@ -666,6 +754,7 @@ export function AuroraPanel() {
   const attachOpen = ui.attachOpen;
   const setAttachOpen = (open: boolean) =>
     store.set((s) => ({ ...s, ui: { ...s.ui, attachOpen: open } }));
+  const closeAttach = useCallback(() => setAttachOpen(false), []);
   const [menuOpen, setMenuOpen] = useState(false);
   const queued = state.operations.filter((op) => op.status === "queued");
 
@@ -793,9 +882,9 @@ export function AuroraPanel() {
           ))}
         </ol>
       )}
-      {attachOpen && <AttachMenu onClose={() => setAttachOpen(false)} />}
       {/* One card: what Aurora is looking at, what you've attached, and what you'll ask. */}
       <div className="au-composer-card">
+        {attachOpen && <AttachMenu onClose={closeAttach} />}
         <div className="au-context">
           <span className="au-context-chip au-truncate" data-testid="context-chip" title={item?.title}>
             <Icon name="lessonDefault" />
